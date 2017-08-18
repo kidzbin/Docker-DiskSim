@@ -1,7 +1,12 @@
 FROM  i686/ubuntu
 
+RUN sed -i 's#http://archive.ubuntu.com/#http://tw.archive.ubuntu.com/#' /etc/apt/sources.list
+
 RUN apt-get update
-RUN apt-get -y install wget git nano gcc g++ make bison flex unzip && apt-get clean
+RUN apt-get -y install wget git nano gcc g++ make bison flex unzip \
+    && apt-get autoclean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 #RUN cd ~ && git clone https://github.com/westerndigitalcorporation/DiskSim
 
